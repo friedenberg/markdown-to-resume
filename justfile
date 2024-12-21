@@ -12,7 +12,7 @@ root_dir := parent_dir(justfile_dir())
 
 pandoc_css := root_dir + "/resume.css"
 pandoc_template_html_embedded := root_dir + '/pandoc-template-html-embedded.html'
-pandoc_template_html_standalone := root_dir + '/pandoc-template-html-embedded.html'
+pandoc_template_html_standalone := root_dir + '/pandoc-template-html-standalone.html'
 pandoc_template_txt := root_dir + '/pandoc-template-txt.txt'
 pandoc_lua_filter_txt := root_dir + '/pandoc-lua-filter-txt.lua'
 
