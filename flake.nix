@@ -22,11 +22,14 @@
           buildCommand = "${old.buildCommand}\n patchShebangs $out";
         });
 
+        # to include all the templates and styles
+        src = ./.;
+
       in rec {
         defaultPackage = packages.markdown-to-resume;
         packages.markdown-to-resume = pkgs.symlinkJoin {
           name = name;
-          paths = [ markdown-to-resume ] ++ buildInputs;
+          paths = [ markdown-to-resume src ] ++ buildInputs;
           buildInputs = [ pkgs.makeWrapper ];
           postBuild = "wrapProgram $out/bin/${name} --prefix PATH : $out/bin";
         };

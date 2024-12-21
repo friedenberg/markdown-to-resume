@@ -9,10 +9,12 @@ name := env_var_or_default("NAME", "name")
 phone := env_var_or_default("PHONE", "phone")
 github_url := env_var_or_default("GITHUB_URL", "github_url")
 
-pandoc_template_html_embedded := justfile_dir() + '/pandoc-template-html-embedded.html'
-pandoc_template_html_standalone := justfile_dir() + '/pandoc-template-html-embedded.html'
-pandoc_template_txt := justfile_dir() + '/pandoc-template-txt.txt'
-pandoc_lua_filter_txt := justfile_dir() + '/pandoc-lua-filter-txt.lua'
+root_dir := parent_dir(justfile_dir())
+
+pandoc_template_html_embedded := root_dir + '/pandoc-template-html-embedded.html'
+pandoc_template_html_standalone := root_dir + '/pandoc-template-html-embedded.html'
+pandoc_template_txt := root_dir + '/pandoc-template-txt.txt'
+pandoc_lua_filter_txt := root_dir + '/pandoc-lua-filter-txt.lua'
 
 pandoc template infile outfile *ARGS:
   pandoc \
