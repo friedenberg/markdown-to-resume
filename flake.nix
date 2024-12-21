@@ -36,6 +36,7 @@
             pandoc
             just
             chromium-html-to-pdf.packages.${system}.html-to-pdf
+            markdown-to-resume
           ]);
 
           inputsFrom = [];
