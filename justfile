@@ -9,7 +9,7 @@ name := env_var_or_default("NAME", "name")
 phone := env_var_or_default("PHONE", "phone")
 github_url := env_var_or_default("GITHUB_URL", "github_url")
 
-html markdown template:
+pandoc template infile outfile *ARGS:
   pandoc \
     --from markdown \
     --section-div \
@@ -25,29 +25,27 @@ html markdown template:
     --standalone \
     --metadata "title={{name}}'s Resume" \
     --template '{{template}}' \
-    '{{markdown}}' -o '{{markdown}}.html'
+    {{ARGS}} \
+    '{{infile}}' -o '{{outfile}}'
 
-text markdown:
-  pandoc \
-    --from markdown \
-    --section-div \
-    --shift-heading-level-by=1 \
-    -c resume.css \
-    -V "version={{version}}" \
-    -V "email={{email}}" \
-    -V "phone={{phone}}" \
-    -V "name={{name}}" \
-    -V "build-date={{date}}" \
-    -V "github-url={{github_url}}" \
-    --metadata "title={{name}}'s Resume" \
-    --template 'pandoc-template-txt.txt' \
-    --embed-resources \
-    --standalone \
-    --reference-links \
-    --columns 80 \
-    --lua-filter pandoc-lua-filter-txt.lua \
-    --to markdown \
-    '{{markdown}}' -o '{{markdown}}.txt'
+html markdown template: \
+    (
+      pandoc
+      template
+      markdown
+      markdown+".html"
+    )
+
+txt markdown: \
+    (
+      pandoc
+      'pandoc-template-txt.txt'
+      markdown
+      markdown+".txt"
+      "--reference-links"
+      "--columns 80"
+      "--lua-filter pandoc-lua-filter-txt.lua"
+    )
 
 html-embedded markdown: (html markdown "pandoc-template-html-embedded.html")
 html-standalone markdown: (html markdown "pandoc-template-html-standalone.html")
