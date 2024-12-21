@@ -7,11 +7,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1734745378,
-        "narHash": "sha256-AqoYTOjRdFf/7RttkAEZjp3/4vYCTpryKmLpf08tnvM=",
+        "lastModified": 1734812118,
+        "narHash": "sha256-FEJVC+0ABVEhJZgR2fXdjOugBu2a4vmXsqwFjFQ08wA=",
         "owner": "friedenberg",
         "repo": "chromium-html-to-pdf",
-        "rev": "62688bebdb001eef0a83a1992e0324c064a4c942",
+        "rev": "65f41d61ff6ae9b146db369538a4404127d05190",
         "type": "github"
       },
       "original": {

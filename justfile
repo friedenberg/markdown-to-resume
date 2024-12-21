@@ -1,6 +1,5 @@
 #! /usr/bin/env just --working-directory . --justfile
 
-css := "resume.css"
 date := `date -u +"%Y-%m"`
 
 version := env_var_or_default("VERSION", "version")
@@ -11,6 +10,7 @@ github_url := env_var_or_default("GITHUB_URL", "github_url")
 
 root_dir := parent_dir(justfile_dir())
 
+pandoc_css := root_dir + "/resume.css"
 pandoc_template_html_embedded := root_dir + '/pandoc-template-html-embedded.html'
 pandoc_template_html_standalone := root_dir + '/pandoc-template-html-embedded.html'
 pandoc_template_txt := root_dir + '/pandoc-template-txt.txt'
@@ -21,7 +21,7 @@ pandoc template infile outfile *ARGS:
     --from markdown \
     --section-div \
     --shift-heading-level-by=1 \
-    -c '{{css}}' \
+    -c '{{pandoc_css}}' \
     -V "version={{version}}" \
     -V "email={{email}}" \
     -V "phone={{phone}}" \
