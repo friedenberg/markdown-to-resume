@@ -9,6 +9,11 @@ name := env_var_or_default("NAME", "name")
 phone := env_var_or_default("PHONE", "phone")
 github_url := env_var_or_default("GITHUB_URL", "github_url")
 
+pandoc_template_html_embedded := justfile_dir() + '/pandoc-template-html-embedded.html'
+pandoc_template_html_standalone := justfile_dir() + '/pandoc-template-html-embedded.html'
+pandoc_template_txt := justfile_dir() + '/pandoc-template-txt.txt'
+pandoc_lua_filter_txt := justfile_dir() + '/pandoc-lua-filter-txt.lua'
+
 pandoc template infile outfile *ARGS:
   pandoc \
     --from markdown \
@@ -39,16 +44,16 @@ html markdown template: \
 txt markdown: \
     (
       pandoc
-      'pandoc-template-txt.txt'
+      pandoc_template_txt
       markdown
       markdown+".txt"
       "--reference-links"
       "--columns 80"
-      "--lua-filter pandoc-lua-filter-txt.lua"
+      "--lua-filter" pandoc_lua_filter_txt
     )
 
-html-embedded markdown: (html markdown "pandoc-template-html-embedded.html")
-html-standalone markdown: (html markdown "pandoc-template-html-standalone.html")
+html-embedded markdown: (html markdown pandoc_template_html_embedded)
+html-standalone markdown: (html markdown pandoc_template_html_standalone)
 
 pdf html:
   html-to-pdf '{{html}}'
